@@ -92,7 +92,7 @@ def material_waste(total_material, material_units, num_jobs, job_consumption):
 
 
 
-# In[54]:
+# In[4]:
 
 
 def interest(principal, rate, periods):
@@ -124,19 +124,21 @@ def interest(principal, rate, periods):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-    quantity = float(rate)*int(periods)
-    interest = round(int(principal)*quantity)
-    
-    return interest
+    quantity = rate * periods
+    interest = principal * quantity
+    returns = principal + interest
+    returns = int(returns)
+
+    return returns
 
 
-# In[ ]:
+# In[5]:
 
 
+interest(45000,.20,5)
 
 
-
-# In[108]:
+# In[14]:
 
 
 def body_mass_index(weight, height):
@@ -174,8 +176,13 @@ def body_mass_index(weight, height):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-    converted_weight = float(weight*0.453592)
-    converted_height = int(height[0])*0.3048+int(height[2:])*0.0254  #height input would look something like "5'2"
+    converted_weight = float(weight * 0.453592)
+    
+    feet = height[0]
+    inches = height[1]
+    total_inches = (feet*12) + inches
+    converted_height = int(total_inches)*0.0254  
+    
     body_mass_index = float(converted_weight/converted_height**2)
     
     return body_mass_index
