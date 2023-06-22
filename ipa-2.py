@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[207]:
+# In[115]:
 
 
 def shift_letter(letter, shift):
@@ -37,16 +37,20 @@ def shift_letter(letter, shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-    letter = letter.lower()
+    if letter == " " and shift == "_":
+        return " "
+    
+    else:
+        letter = letter.upper()
 
-    number_value = (ord(letter) - ord('a') + shift) % 26 + ord('a')
+        number_value = (ord(letter) - ord('A') + shift) % 26 + ord('A')
 
-    shifted_letter = chr(number_value)
+        shifted_letter = chr(number_value)
 
-    return shifted_letter
+        return shifted_letter
 
 
-# In[208]:
+# In[116]:
 
 
 def caesar_cipher(message, shift):
@@ -71,16 +75,26 @@ def caesar_cipher(message, shift):
     # Stay within the function. Only use the parameters as input. The function should return your answer.
       
     new_message = ""
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    new_alpha = alphabet[int(shift):] + alphabet[0:int(shift)]  # re-arranged alphabet acc to shift
-          
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'   
+    if shift >= 26:
+        shift = shift % 26
+    else:
+        shift = shift
+    
     for letter in message:        
         letter = letter.upper()
         
         if letter in alphabet:
-            x = alphabet.find(letter)
-            new_letter = new_alpha[x]
-        
+                   
+            if shift <= 26:
+                new_alpha = alphabet[int(shift):] + alphabet[0:int(shift)]
+                x = alphabet.find(letter)
+                new_letter = new_alpha[x]
+            
+            else:
+                new_alpha = alphabet[shift:] + alphabet[0:shift]
+                new_letter = new_alpha[shift]          
+                
         else:
             new_letter=letter
         
@@ -89,7 +103,7 @@ def caesar_cipher(message, shift):
     return new_message
 
 
-# In[541]:
+# In[117]:
 
 
 def shift_by_letter(letter, letter_shift):
@@ -169,7 +183,7 @@ def shift_by_letter(letter, letter_shift):
                 return lookup_table[letter_value]
 
 
-# In[542]:
+# In[118]:
 
 
 def vigenere_cipher(message, key):
@@ -244,7 +258,7 @@ def vigenere_cipher(message, key):
     return new_message
 
 
-# In[657]:
+# In[119]:
 
 
 def scytale_cipher(message, shift):
@@ -314,16 +328,9 @@ def scytale_cipher(message, shift):
             encoded_message += message[x]
             
         return encoded_message
-        
 
 
-# In[ ]:
-
-
-
-
-
-# In[203]:
+# In[121]:
 
 
 def scytale_decipher(message, shift):
