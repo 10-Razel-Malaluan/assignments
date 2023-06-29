@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[115]:
+# In[14]:
 
 
 def shift_letter(letter, shift):
@@ -37,20 +37,23 @@ def shift_letter(letter, shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-    if letter == " " and shift == "_":
-        return " "
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     
-    else:
+    if letter in alphabet:
+        
         letter = letter.upper()
 
         number_value = (ord(letter) - ord('A') + shift) % 26 + ord('A')
 
         shifted_letter = chr(number_value)
-
+        
         return shifted_letter
+    
+    else:
+        return letter
 
 
-# In[116]:
+# In[15]:
 
 
 def caesar_cipher(message, shift):
@@ -258,7 +261,7 @@ def vigenere_cipher(message, key):
     return new_message
 
 
-# In[119]:
+# In[53]:
 
 
 def scytale_cipher(message, shift):
@@ -315,22 +318,18 @@ def scytale_cipher(message, shift):
     # Stay within the function. Only use the parameters as input. The function should return your answer.
   
     encoded_message = ""  
+    
     if len(message)%shift != 0:
-        
         message += "_"*(shift-(len(message)%shift))
         
-        for i in range(len(message)):
-            x = (i // shift) + (len(message) // shift) * (i % shift)
-            encoded_message += message[x]
-    else:
-        for i in range(len(message)):
-            x = (i // shift) + (len(message) // shift) * (i % shift)
-            encoded_message += message[x]
-            
-        return encoded_message
+    for i in range(len(message)):
+        x = (i // shift) + (len(message) // shift) * (i % shift)
+        encoded_message += message[x]
+
+    return encoded_message
 
 
-# In[121]:
+# In[54]:
 
 
 def scytale_decipher(message, shift):
@@ -370,4 +369,10 @@ def scytale_decipher(message, shift):
                 
     final_decryption = ''.join(segments)
     return final_decryption
+
+
+# In[ ]:
+
+
+
 
