@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[806]:
+# In[23]:
 
 
 def relationship_status(from_member, to_member, social_graph):
@@ -41,43 +41,7 @@ def relationship_status(from_member, to_member, social_graph):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-    social_graph = {
-    "@bongolpoc":{"first_name":"Joselito",
-                  "last_name":"Olpoc",
-                  "following":[
-                  ]
-    },
-    "@joaquin":  {"first_name":"Joaquin",
-                  "last_name":"Gonzales",
-                  "following":[
-                      "@chums","@jobenilagan"
-                  ]
-    },
-    "@chums" : {"first_name":"Matthew",
-                "last_name":"Uy",
-                "following":[
-                    "@bongolpoc","@miketan","@rudyang","@joeilagan"
-                ]
-    },
-    "@jobenilagan":{"first_name":"Joben",
-                   "last_name":"Ilagan",
-                   "following":[
-                    "@eeebeee","@joeilagan","@chums","@joaquin"
-                   ]
-    },
-    "@joeilagan":{"first_name":"Joe",
-                  "last_name":"Ilagan",
-                  "following":[
-                    "@eeebeee","@jobenilagan","@chums"
-                  ]
-    },
-    "@eeebeee":  {"first_name":"Elizabeth",
-                  "last_name":"Ilagan",
-                  "following":[
-                    "@jobenilagan","@joeilagan"
-                  ]
-    },
-}
+   
     if from_member in social_graph:
         if to_member in social_graph:
             w = social_graph[from_member]
@@ -106,17 +70,21 @@ def relationship_status(from_member, to_member, social_graph):
                 return "no relationship"
             
     else:
-        y = social_graph[to_member]
-        z = y['following']
-        
-        if from_member in z:
-            return "followed by"
+               
+        if to_member in social_graph:
+            y = social_graph[to_member]
+            z = y['following']
+            
+            if from_member in z:
+                return "followed by"
+            else:
+                return "no relationship"
         
         else:
             return "no relationship"      
 
 
-# In[83]:
+# In[24]:
 
 
 def tic_tac_toe(board):
@@ -195,7 +163,13 @@ def tic_tac_toe(board):
 
 
 
-# In[356]:
+# In[ ]:
+
+
+
+
+
+# In[153]:
 
 
 def eta(first_stop, second_stop, route_map):
@@ -231,33 +205,33 @@ def eta(first_stop, second_stop, route_map):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-    stops = list(legs)
+    stops = list(route_map)
     
-    if first_stop==second_stop:
+    if first_stop == second_stop:
         return 0
+
     else:
-    
-        for i in range(len(stops)):
+        time = 0
+        for start in stops:
+            x = list(start)[0]
+            y = list(start)[1]
 
-            x = list(stops[i])
+            if x == first_stop and y == second_stop:
+                time += route_map[start]["travel_time_mins"]
+                break
 
-            
-
-            y = x[0]
-
-            if y == first_stop:
-                start = stops[i]
-                initial = int(legs[start]["travel_time_mins"])
-                if list(start)[1] == second_stop:
-                    time = initial
-                    
-            else: 
-                z = x[1]
-
-                if z == second_stop:
-                    going = stops[i]
-                    current = int(legs[going]["travel_time_mins"])
-                    time = initial + current
+            if x == first_stop:
+                if y != second_stop:
+                    next_stop = (y, second_stop)
+                    if next_stop in route_map:
+                        current = route_map[next_stop]["travel_time_mins"]
+                        time += route_map[start]["travel_time_mins"] + current
 
         return time
+
+
+# In[ ]:
+
+
+
 
