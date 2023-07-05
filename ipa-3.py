@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[23]:
+# In[3]:
 
 
 def relationship_status(from_member, to_member, social_graph):
@@ -54,7 +54,7 @@ def relationship_status(from_member, to_member, social_graph):
                 if from_member in z:
                     return "friends"
                 else:
-                    return "following"   
+                    return "follower"   
 
             else:
                 if from_member in z:
@@ -65,7 +65,7 @@ def relationship_status(from_member, to_member, social_graph):
             w = social_graph[from_member]
             x = w['following']
             if to_member in x:
-                    return "following"
+                    return "follower"
             else:
                 return "no relationship"
             
@@ -81,10 +81,10 @@ def relationship_status(from_member, to_member, social_graph):
                 return "no relationship"
         
         else:
-            return "no relationship"      
+            return "no relationship"  
 
 
-# In[24]:
+# In[158]:
 
 
 def tic_tac_toe(board):
@@ -137,39 +137,198 @@ def tic_tac_toe(board):
             return "X"
 
         if column.find("OOO") != -1:
-            return "O" 
+            return "O"  
         
     # Checking diagonals
-    size = len(board)
-       
-    diagonal1 = [board[i][i] for i in range(size)]
-    if len(set(diagonal1)) == 1 and diagonal1[0] != "":
-        return diagonal1[0]
-
-    diagonal2 = [board[i][size - 1 - i] for i in range(size)]
-    if len(set(diagonal2)) == 1 and diagonal2[0] != "":
-        return diagonal2[0]
-
-    for i in range(1, size):
-        diagonal = [board[j][j+i] for j in range(size-i)]
-        if len(set(diagonal)) == 1 and diagonal[0] != "":
-            return diagonal[0]
-
-    diagonal = [board[j+i][j] for j in range(size-i)]
-    if len(set(diagonal)) == 1 and diagonal[0] != "":
-        return diagonal[0]
+        size = len(board)
         
+        #doing this the hard way :"D
+        if len(board) == 3:
+            x = board[0][0] + board[1][1] + board [2][2] 
+            y = board[0][2] + board[1][1] + board [2][0]
+            if x.find("XXX") != -1:
+                return "X"
+            elif y.find("XXX") != -1:
+                return "X"
+        
+        if len(board) == 4:
+            x = board[0][0] + board[1][1] + board [2][2] + board[3][3] 
+            y = board[0][3] + board[1][2] + board [2][1] + board[3][0]
+            upper_y = board[0][2] + board[1][1] + board[2][0]
+            lower_y = board[1][3] + board[2][2] + board[3][1]
+            upper_x = board[0][1] + board[1][2] + board[2][3]
+            lower_x = board[1][0] + board[2][1] + board[3][2]
+            if x.find("XXX") != -1:
+                return "X"
+            if upper_x.find("XXX")!= -1:
+                return "X"
+            if lower_x.find("XXX")!= -1:
+                return "X"
+            
+            if y.find("XXX") != -1:
+                return "X"
+            if upper_y.find("XXX")!= -1:
+                return "X"
+            if lower_y.find("XXX")!= -1:
+                return "X"
+            
+            if x.find("OOO") != -1:
+                return "O"
+            if upper_x.find("OOO")!= -1:
+                return "O"
+            if lower_x.find("OOO")!= -1:
+                return "O"
+            
+            if y.find("OOO") != -1:
+                return "O"
+            if upper_y.find("OOO")!= -1:
+                return "O"
+            if lower_y.find("OOO")!= -1:
+                return "O"
+            
+            
+        if len(board) == 5:
+            x = board[0][0] + board[1][1] + board[2][2] + board[3][3] + board[4][4]
+            y = board[0][4] + board[1][3] + board[2][2] + board[3][1] + board[4][0]
+            
+            upper_y = board[0][2] + board[1][1] + board[2][0]
+            second_upper_y = board[0][3] + board[1][2] + board[2][1] + board[3][0]
+            
+            lower_y = board[2][4] + board[3][3] + board[4][2]
+            second_lower_y = board[1][4] + board[2][3] + board[3][2] + board[4][1]
+            
+            upper_x = board[0][2] + board[1][3] + board[2][4]
+            second_upper_x = board[0][1] + board[1][2] + board[2][3] + board[3][4]
+            
+            lower_x = board[2][0] + board[3][1] + board[4][2]
+            second_lower_x = board[1][0] + board[2][1] + board[3][2] + board[4][3]
+            
+            if x.find("XXX") != -1:
+                return "X"
+            if upper_x.find("XXX")!= -1:
+                return "X"
+            if lower_x.find("XXX")!= -1:
+                return "X"
+            if second_lower_x.find("XXX")!= -1:
+                return "X"
+            
+            if y.find("XXX") != -1:
+                return "X"
+            if upper_y.find("XXX")!= -1:
+                return "X"
+            if second_upper_y.find("XXX")!= -1:
+                return "X"
+            if lower_y.find("XXX")!= -1:
+                return "X"
+            if second_lower_y.find("XXX")!= -1:
+                return "X"
+            
+            if x.find("OOO") != -1:
+                return "O"
+            if upper_x.find("OOO")!= -1:
+                return "O"
+            if second_upper_x.find("OOO")!= -1:
+                return "O"
+            if lower_x.find("OOO")!= -1:
+                return "O"
+            if second_lower_x.find("OOO")!= -1:
+                return "O"
+            
+            if y.find("OOO") != -1:
+                return "O"
+            if upper_y.find("OOO")!= -1:
+                return "O"
+            if second_upper_y.find("OOO")!= -1:
+                return "O"
+            if lower_y.find("OOO")!= -1:
+                return "O"
+            if second_lower_y.find("OOO")!= -1:
+                return "O"
+            
+        if len(board) == 6:
+            x = board[0][0] + board[1][1] + board[2][2] + board[3][3] + board[4][4] + board[5][5]
+            y = board[0][5] + board[1][4] + board[2][3] + board[3][2] + board[4][1] + board[5][0]
+
+            upper_y = board[0][3] + board[1][2] + board[2][1] + board[3][2] + board[4][3] + board[5][4]
+            second_upper_y = board[0][4] + board[1][3] + board[2][2] + board[3][1] + board[4][2] + board[5][3]
+            third_upper_y = board[0][2] + board[1][1] + board[2][0]
+
+            lower_y = board[2][5] + board[3][4] + board[4][3] + board[5][2]
+            second_lower_y = board[1][5] + board[2][4] + board[3][3] + board[4][2] + board[5][1]
+            third_lower_y = board[3][5] + board[4][4] + board[5][3]
+
+            upper_x = board[0][2] + board[1][3] + board[2][4] + board[3][5]
+            second_upper_x = board[0][1] + board[1][2] + board[2][3] + board[3][4] + board[4][5]
+            third_upper_x = board[0][3] + board[1][4] + board[2][5]
+
+            lower_x = board[2][0] + board[3][1] + board[4][2] + board[5][3]
+            second_lower_x = board[1][0] + board[2][1] + board[3][2] + board[4][3] + board[5][4]
+            third_lower_x = board[3][0] + board[4][1] + board[5][2]
+            
+            if x.find("XXX") != -1:
+                return "X"
+            if upper_x.find("XXX")!= -1:
+                return "X"
+            if second_upper_x.find("XXX")!= -1:
+                return "X"
+            if third_upper_x.find("XXX")!= -1:
+                return "X"
+            if lower_x.find("XXX")!= -1:
+                return "X"
+            if second_lower_x.find("XXX")!= -1:
+                return "X"
+            if third_lower_x.find("XXX")!= -1:
+                return "X"
+            
+            if y.find("XXX") != -1:
+                return "X"
+            if upper_y.find("XXX")!= -1:
+                return "X"
+            if second_upper_y.find("XXX")!= -1:
+                return "X"
+            if third_upper_y.find("XXX")!= -1:
+                return "X"
+            if lower_y.find("XXX")!= -1:
+                return "X"
+            if second_lower_y.find("XXX")!= -1:
+                return "X"
+            if third_lower_y.find("XXX")!= -1:
+                return "X"
+            
+            if x.find("OOO") != -1:
+                return "O"
+            if upper_x.find("OOO")!= -1:
+                return "O"
+            if second_upper_x.find("OOO")!= -1:
+                return "O"
+            if third_upper_x.find("OOO")!= -1:
+                return "O"
+            if lower_x.find("OOO")!= -1:
+                return "O"
+            if second_lower_x.find("OOO")!= -1:
+                return "O"
+            if third_lower_x.find("OOO")!= -1:
+                return "O"
+            
+            if y.find("OOO") != -1:
+                return "O"
+            if upper_y.find("OOO")!= -1:
+                return "O"
+            if second_upper_y.find("OOO")!= -1:
+                return "O"
+            if third_upper_y.find("OOO")!= -1:
+                return "O"
+            if lower_y.find("OOO")!= -1:
+                return "O"
+            if second_lower_y.find("OOO")!= -1:
+                return "O"
+            if third_lower_y.find("OOO")!= -1:
+                return "O"
+
     return "NO WINNER"   
 
 
-
-# In[ ]:
-
-
-
-
-
-# In[153]:
+# In[164]:
 
 
 def eta(first_stop, second_stop, route_map):
@@ -205,27 +364,23 @@ def eta(first_stop, second_stop, route_map):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-    stops = list(route_map)
-    
     if first_stop == second_stop:
         return 0
 
     else:
         time = 0
-        for start in stops:
-            x = list(start)[0]
-            y = list(start)[1]
+        current_stop = first_stop
 
-            if x == first_stop and y == second_stop:
-                time += route_map[start]["travel_time_mins"]
+        while True:
+            if (current_stop, second_stop) in route_map:
+                time += route_map[(current_stop, second_stop)]["travel_time_mins"]
                 break
 
-            if x == first_stop:
-                if y != second_stop:
-                    next_stop = (y, second_stop)
-                    if next_stop in route_map:
-                        current = route_map[next_stop]["travel_time_mins"]
-                        time += route_map[start]["travel_time_mins"] + current
+            next_stops = [key[1] for key in route_map.keys() if key[0] == current_stop]
+            if len(next_stops) > 0:
+                next_stop = next_stops[0]
+                time += route_map[(current_stop, next_stop)]["travel_time_mins"]
+                current_stop = next_stop
 
         return time
 
